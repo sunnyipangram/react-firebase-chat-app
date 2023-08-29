@@ -32,7 +32,7 @@ function App() {
   }
   return <>{Room ? <Chat Room={Room}/> :
     <div className='room'>
-      <label>enter room name</label>
+      <label>Enter Room Code</label>
       <input type="text" ref={roomInputref} className="" />
       <button onClick={()=>setRoom(roomInputref.current.value)}>enter chat</button>
     </div>}
