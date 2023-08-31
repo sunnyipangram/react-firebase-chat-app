@@ -7,14 +7,14 @@
     margin: 0 auto;
     border-radius: 5px;
     overflow: hidden;
-    border: 2px solid #3b5998;
+    border: 2px solid #245443;
   }
   .header {
-    background-color: #3b9877;
+    background-color: #245443;
     color: white;
     width: 100%;
     text-align: center;
-  }
+}
   .messages {
     display: flex;
     flex-direction: column;
@@ -33,10 +33,24 @@
 }
 .message.right {
   margin-right: auto;
-  background: #1a106929;
+  position: relative;
+  background: #202c33;
   padding: 21px 20px;
-  border-radius: 157% 99% 48% 52% / 79% 52% 148% 100%;
+  color: white;
+  font-size: 15px;
+  font-weight: 100;
 }
+.message.right::after {
+  border-radius: 1px 0px 3px 14px;
+  content: "";
+  width: 18px;
+  height: 12px;
+  background-color: #202c33;
+  position: absolute;
+  top: 0;
+  left: -6px;
+}
+
 .message-box {
   display: flex;
   flex-direction: column;
@@ -47,15 +61,25 @@
 .message.left {
   margin-left: auto;
   padding: 23px 20px;
-  background: #e1faf9;
-  border-radius: 148% 124% 40% 100% / 73% 34% 100% 30%;
+  background: #245443;
+  color: white;
+  position: relative;
+}
+.message.left::after {
+  border-radius: 0 0px 14px 0px;
+  content: "";
+  width: 18px;
+  height: 12px;
+  background-color: #245443;
+  position: absolute;
+  top: 0;
+  right: -6px;
 }
  
   .user {
     font-weight: bold;
-    margin-right: 10px;
-    color: #333;
-  }
+    color: #b0a8a8;
+}
   
   .new-message-form {
     display: flex;
@@ -69,7 +93,8 @@
     outline: none;
     background: transparent;
     font-size: 16px;
-    color: #333;
+    color: #d4c9c9;
+    transition: 0.8s ease all;
     padding: 10px;
     border-radius: 5px 0 0 5px;
   }
@@ -88,9 +113,14 @@
 .chat-app {
   max-width: 600px;
   margin: 0 auto;
+  background-image: url('https://i.pinimg.com/originals/ff/ec/85/ffec85cf860576cffd2256f145c2ad3b.jpg');
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
+}
+.new-message-input:focus{
+  color: white;
+  box-shadow:inset 600px 0px 0px 0px #2454436e;
 }
 
 .header {
@@ -121,7 +151,7 @@
 
 .user {
   font-weight: bold;
-  margin-bottom: 5px;
+ 
 }
 
 .message-text {
@@ -142,7 +172,7 @@
 
 .send-button {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #245443;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -151,5 +181,5 @@
 }
 
 .send-button:hover {
-  background-color: #0056b3;
+  background-color: #245443;
 }
