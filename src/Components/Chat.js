@@ -1,10 +1,11 @@
 // Chat.js
 import React, { useEffect, useState } from 'react';
 import { auth, db, messaging } from '../FirebaseConfig';
+
 import { addDoc, collection, serverTimestamp, query, where, orderBy, onSnapshot } from 'firebase/firestore';
 import '../Style/Chat.css';
-import { getMessaging, getToken } from 'firebase/messaging';
-import Sidebar from './Sidebar';
+import { getMessaging, getToken, onMessage } from 'firebase/messaging';
+
 import {BiSolidSend} from 'react-icons/bi'
 const Chat = (props) => {
   const { Room } = props;
@@ -14,21 +15,10 @@ const Chat = (props) => {
   const [lastNotificationTime, setLastNotificationTime] = useState(null);
 
 
-  useEffect(() => {
-    // Request notification permission
-    const requestNotificationPermission = async () => {
-      try {
-        await messaging.requestPermission();
-        const token = await getToken(messaging);
-        console.log('FCM Token:', token);
-      } catch (error) {
-        console.error('Notification permission error:', error);
-      }
-    };
 
-    requestNotificationPermission();
-  }, []);
   
+
+
 
   useEffect(() => {
   
@@ -75,20 +65,7 @@ const Chat = (props) => {
     return () => unsubscribe();
   }, [Room]);
 
-  useEffect(() => {
-    console.log(messaging,' nerherhhrhe')
-    const requestNotificationPermission = async () => {
-      try {
-        await Notification.requestPermission();
-        const token = await messaging.getToken();
-        console.log('FCM Token:', token);
-      } catch (error) {
-        console.error('Notification permission error:', error);
-      }
-    };
-
-    requestNotificationPermission();
-  }, []);
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -108,13 +85,15 @@ const Chat = (props) => {
     //   body: newMessage,
     // });
   };
-  console.log(auth.currentUser.photoURL)
+ 
 
   return (
     <div className="chat-app">
-      <Sidebar/>
+      
       <div className="header">
-        <h1>Welcome To {Room.toUpperCase()}</h1>
+        <img src={auth.currentUser.photoURL} style={{width:'40px',height:'40px',borderRadius:'50%'}} alt="" />
+        <h4 className='username'> {auth.currentUser.displayName}</h4>
+       
       </div>
       <div className="message-box">
     {messages.map((message) => {

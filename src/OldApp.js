@@ -1,3 +1,5 @@
+
+
 import React, { useState,useRef,useEffect } from 'react';
 import './App.css';
 import Auth from './Components/Auth';
@@ -6,7 +8,6 @@ import Chat from './Components/Chat';
 import { signOut } from 'firebase/auth';
 import { auth, messaging } from './FirebaseConfig';
 import { getToken } from 'firebase/messaging';
-import { BiFileBlank } from 'react-icons/bi';
 
 const cookies = new Cookies
 
@@ -15,7 +16,6 @@ function App() {
   const [IsAuth, setIsAuth] = useState(cookies.get('auth-token'))
   const [Room, setRoom] = useState('')
   const roomInputref=useRef(null)
-  const [AddNewChat, setAddNewChat] = useState(false)
 
   useEffect(() => {
     // console.log(messaging,' nerherhhrhe')
@@ -23,27 +23,22 @@ function App() {
       try {
       const permission=  await Notification.requestPermission();
       console.log(permission);
-      // const token = await getToken(messaging, {
-      //       vapidKey:
-      //         "BGkbYM1UNhe-lHqCit7noK-gynQh0_4ZAaiISI3y-r4Dv3kgRpW1gOTAn1iPbpA61mMsSmO-T9K1pCKtfpqGMQU",
-      //     });
-      //     console.log("Token Gen", token);
+      const token = await getToken(messaging);
+          console.log("Token Gen", token);
       
-      if (permission === "granted") {
-        // Generate Token
-        const token = await getToken(messaging, {
-          vapidKey:
-            "BGkbYM1UNhe-lHqCit7noK-gynQh0_4ZAaiISI3y-r4Dv3kgRpW1gOTAn1iPbpA61mMsSmO-T9K1pCKtfpqGMQU",
-        });
-        console.log("Token Gen", token);
+      // if (permission === "granted") {
+      //   // Generate Token
+      //   const token = await getToken(messaging, {
+      //     vapidKey:
+      //       "BGkbYM1UNhe-lHqCit7noK-gynQh0_4ZAaiISI3y-r4Dv3kgRpW1gOTAn1iPbpA61mMsSmO-T9K1pCKtfpqGMQU",
+      //   });
+      //   console.log("Token Gen", token);
        
-        // Send this token  to server ( db)
-      } else if (permission === "denied") {
-        alert("You denied for the notification");
-      }
-      else{
-        console.log("default permission")
-      }
+      //   // Send this token  to server ( db)
+      // } else if (permission === "denied") {
+      //   alert("You denied for the notification");
+      // }
+        // const token = await getToken(messaging,{vapidKey:'BGkbYM1UNhe-lHqCit7noK-gynQh0_4ZAaiISI3y-r4Dv3kgRpW1gOTAn1iPbpA61mMsSmO-T9K1pCKtfpqGMQU'});
         
       } catch (error) {
         console.error('Notification permission error:', error);
@@ -73,11 +68,8 @@ function App() {
   return <>{Room ? <Chat Room={Room}/> :
     <div className='room'>
       <label>Enter Room Code</label>
-      <button onClick={()=>{setAddNewChat(!AddNewChat)}}>Start Chat <BiFileBlank/></button>
-
-      {AddNewChat?<>  <input type="text" ref={roomInputref} className="" />
-      <button onClick={()=>setRoom(roomInputref.current.value)}>enter chat</button></>:""}
-     
+      <input type="text" ref={roomInputref} className="" />
+      <button onClick={()=>setRoom(roomInputref.current.value)}>enter chat</button>
     </div>}
     <div className="signout"><button onClick={SignUserOut}> Sign Out</button></div>
     </>

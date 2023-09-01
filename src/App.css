@@ -26,6 +26,7 @@ body {
 .room {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .room label {
@@ -60,4 +61,57 @@ body {
 
 .sign-out {
   margin-top: 50px;
+}
+
+
+
+
+
+/* Auth.css */
+
+.auth {
+  background: #25D366;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.auth-header {
+  color: white;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.auth-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  outline: 0;
+  border: 0;
+}
+
+.auth-button {
+  background: #128C7E;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.auth-button.auth-google {
+  background: #34B7F1;
+}
+
+.auth-divider {
+  color: white;
+  margin-top: 20px;
+}
+
+.auth-switch {
+  color: white;
+  margin-top: 20px;
+  cursor: pointer;
 }

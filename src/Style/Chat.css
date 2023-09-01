@@ -126,6 +126,26 @@
 .header {
   text-align: center;
   margin-bottom: 20px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+}
+.header img{
+  position: relative;
+}
+.header img::after{
+  position: absolute;
+  content: "";
+  height: 10px;
+  z-index: 100;
+  width: 10px;
+  background-color: blue;
+  top: 0;
+  left: 0;
+
 }
 
 .message-box {
